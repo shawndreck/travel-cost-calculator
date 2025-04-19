@@ -1,25 +1,48 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Fuel Cost Calculator</title>
   <link rel="manifest" href="manifest.json" />
-  <meta name="theme-color" content="#2c3e50"/>
+  <meta name="theme-color" content="#2c3e50" />
   <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
+  <div>
+<form onsubmit="event.preventDefault(); calculate();"
+      name="calculator" id="calculator">
   <div class="container">
-    <h1>Fuel Cost Calculator</h1>
+    <h1>Travel Cost Calculator</h1>
     <input type="number" id="distance" placeholder="Enter distance (km)" />
-    <button onclick="calculate()">Calculate</button>
+    <button type="submit">Calculate</button>
     <p id="result">Cost: GHS 0.00</p>
   </div>
-  <script src="script.js"></script>
-  <script>
-    if ('serviceWorker' in navigator) {
-      navigator.serviceWorker.register('service-worker.js');
-    }
-  </script>
+
+</form>
+
+<div class="car-details">
+
+  <h2>Car Details</h2>
+  <label for="fuel-price">Fuel Price (GHS/Litre):</label>
+  <div class="flex">
+    <input type="number" id="fuel-price" value="15.00" form="calculate" />
+    <button onclick="await getGoilPetrolPrice()">Refresh</button>
+  </div>
+  <label for="fuel-consumption">Fuel Consumption (L/100km):</label>
+  <input type="number" id="fuel-consumption" value="6.5" form="calculate" />
+</div>
+
+<script src="script.js"></script>
+<script>
+  if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.register('service-worker.js');
+  }
+</script>
+
+  </div>
 </body>
+
 </html>
