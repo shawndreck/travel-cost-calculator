@@ -40,7 +40,7 @@ document.addEventListener("DOMContentLoaded", async () => {
   }
 }
 );
-document.getElementById("calculator").addEventListener("click", calculate);
+document.getElementById("calculator").addEventListener("submit", calculate);
 document.getElementById("distance").addEventListener("input", calculate);
 document.getElementById("fuel-consumption").addEventListener("input", calculate);
 // document.getElementById("fuel-price").addEventListener("input", calculate);
