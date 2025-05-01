@@ -47,7 +47,6 @@ function calculate() {
     `;
     document.getElementById("result").innerHTML = resultHtml; // Corrected to innerHTML
     // Calculate the number of litres for 100km
-    console.log(`Litres for 100 km: ${litresFor100km} litres`);
 
   } else {
     alert("Please enter a valid number for distance.");
