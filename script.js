@@ -14,17 +14,38 @@ function calculate() {
 
     const resultHtml = `
       <div class="result-wrapper">
-      <h2>Trip Cost Calculation</h2>
-      <p class="result-line">Distance: ${distance} km</p>
-      <p class="result-line">Fuel Efficiency: ${efficiency} km/l</p>
-      <p class="result-line">Fuel Price: ₵${pricePerLitre} per litre</p>
-      <p class="result-line">Fuel Consumption: ${fuelConsumption} %</p>
-      <p class="result-line">Litres Used: ${litresUsed.toFixed(2)} litres</p>
-      <p class="result-line">Total Cost: ₵${formattedCost}</p>
-      <p class="result-line">Litres for 100 km: ${litresFor100km} litres</p>
-    </div>
+        <h2>Trip Cost Breakdown</h2>
+        <div class="result-item highlight">
+          <span class="result-label">Total Cost:</span>
+          <span class="result-value">₵${formattedCost}</span>
+        </div>
+        <div class="result-item">
+          <span class="result-label">Distance:</span>
+          <span class="result-value">${distance} km</span>
+        </div>
+        <div class="result-item">
+          <span class="result-label">Fuel Efficiency:</span>
+          <span class="result-value">${efficiency} km/l</span>
+        </div>
+        <div class="result-item">
+          <span class="result-label">Fuel Price:</span>
+          <span class="result-value">₵${pricePerLitre} per litre</span>
+        </div>
+        <div class="result-item">
+          <span class="result-label">Fuel Consumption:</span>
+          <span class="result-value">${fuelConsumption}%</span>
+        </div>
+        <div class="result-item">
+          <span class="result-label">Litres Used:</span>
+          <span class="result-value">${litresUsed.toFixed(2)} litres</span>
+        </div>
+        <div class="result-item">
+          <span class="result-label">Litres for 100 km:</span>
+          <span class="result-value">${litresFor100km} litres</span>
+        </div>
+      </div>
     `;
-    document.getElementById("result").innerHtml = resultHtml; // Corrected to innerHTML
+    document.getElementById("result").innerHTML = resultHtml; // Corrected to innerHTML
     // Calculate the number of litres for 100km
     console.log(`Litres for 100 km: ${litresFor100km} litres`);
 
@@ -68,3 +89,15 @@ document.addEventListener("DOMContentLoaded", async () => {
 );
 document.getElementById("calculator").addEventListener("submit", calculate);
 document.getElementById("fuel-consumption").addEventListener("input", calculate);
+
+function showPopup(resultHtml) {
+  const popup = document.getElementById("result-popup");
+  const resultContent = document.getElementById("result-content");
+  resultContent.innerHTML = resultHtml;
+  popup.classList.remove("hidden");
+}
+
+function closePopup() {
+  const popup = document.getElementById("result-popup");
+  popup.classList.add("hidden");
+}
