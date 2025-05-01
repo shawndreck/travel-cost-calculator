@@ -8,6 +8,7 @@
   <link rel="manifest" href="manifest.json" />
   <meta name="theme-color" content="#2c3e50" />
   <link rel="stylesheet" href="style.css">
+  <link rel="icon" href="favicon.ico" type="image/x-icon">
 </head>
 
 <body>
@@ -20,26 +21,27 @@
       <form onsubmit="event.preventDefault(); calculate();" name="calculator" id="calculator" class="form">
         <div class="form-group">
           <label for="distance">Distance (km):</label>
-          <input type="number" id="distance" placeholder="Enter distance (km)" class="input" />
+          <input type="number" id="distance" placeholder="Enter distance (km)" class="input"
+          size="3" maxlength="3" />
         </div>
 
         <div class="form-group">
           <label for="fuel-price">Fuel Price (GHS/Litre):</label>
           <div class="input-group">
             <input type="number" id="fuel-price" value="15.00" class="input" step="0.01" />
-            <button type="button" class="btn refresh-btn" onclick="await getGoilPetrolPrice()">Refresh</button>
+            <!-- <button type="button" class="btn refresh-btn" onclick="await getGoilPetrolPrice()">Refresh</button> -->
           </div>
         </div>
 
         <div class="form-group">
-          <label for="fuel-consumption">Fuel Consumption (L/100km):</label>
-          <input type="number" id="fuel-consumption" value="6.5" class="input" />
+          <label for="fuel-consumption">Fuel Consumption (km/l):</label>
+          <input type="number" id="fuel-consumption" value="6.7" class="input" />
         </div>
 
         <button type="submit" class="btn calculate-btn">Calculate</button>
       </form>
 
-      <p id="result" class="result">Cost: GHS 0.00</p>
+      <div id="result" class="result">Cost: GHS 0.00</div>
     </section>
   </main>
 
