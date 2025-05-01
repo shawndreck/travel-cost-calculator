@@ -34,13 +34,16 @@ async function getGoilPetrolPrice() {
 }
 
 document.addEventListener("DOMContentLoaded", async () => {
-  const petrolPrice = await getGoilPetrolPrice();
-  if (petrolPrice) {
-    document.getElementById("fuel-price").value = petrolPrice;
+  try {
+
+    const petrolPrice = await getGoilPetrolPrice();
+    if (petrolPrice) {
+      document.getElementById("fuel-price").value = petrolPrice;
+    }
+  }catch (error) {
+    console.error('Could not get the current petrol price from the internet:', error);
   }
 }
 );
 document.getElementById("calculator").addEventListener("submit", calculate);
-//document.getElementById("distance").addEventListener("input", calculate);
 document.getElementById("fuel-consumption").addEventListener("input", calculate);
-// document.getElementById("fuel-price").addEventListener("input", calculate);

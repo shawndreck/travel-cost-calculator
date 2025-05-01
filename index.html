@@ -11,38 +11,48 @@
 </head>
 
 <body>
-  <div>
-<form onsubmit="event.preventDefault(); calculate();"
-      name="calculator" id="calculator">
-  <div class="container">
+  <header class="header">
     <h1>Travel Cost Calculator</h1>
-    <input type="number" id="distance" placeholder="Enter distance (km)" />
-    <button type="submit">Calculate</button>
-    <p id="result">Cost: GHS 0.00</p>
-  </div>
+  </header>
 
-</form>
+  <main class="main-content">
+    <section class="calculator-section">
+      <form onsubmit="event.preventDefault(); calculate();" name="calculator" id="calculator" class="form">
+        <div class="form-group">
+          <label for="distance">Distance (km):</label>
+          <input type="number" id="distance" placeholder="Enter distance (km)" class="input" />
+        </div>
 
-<div class="car-details">
+        <div class="form-group">
+          <label for="fuel-price">Fuel Price (GHS/Litre):</label>
+          <div class="input-group">
+            <input type="number" id="fuel-price" value="15.00" class="input" step="0.01" />
+            <button type="button" class="btn refresh-btn" onclick="await getGoilPetrolPrice()">Refresh</button>
+          </div>
+        </div>
 
-  <h2>Car Details</h2>
-  <label for="fuel-price">Fuel Price (GHS/Litre):</label>
-  <div class="flex">
-    <input type="number" id="fuel-price" value="15.00" form="calculate" />
-    <button onclick="await getGoilPetrolPrice()">Refresh</button>
-  </div>
-  <label for="fuel-consumption">Fuel Consumption (L/100km):</label>
-  <input type="number" id="fuel-consumption" value="6.5" form="calculate" />
-</div>
+        <div class="form-group">
+          <label for="fuel-consumption">Fuel Consumption (L/100km):</label>
+          <input type="number" id="fuel-consumption" value="6.5" class="input" />
+        </div>
 
-<script src="script.js"></script>
-<script>
-  if ('serviceWorker' in navigator) {
-    navigator.serviceWorker.register('service-worker.js');
-  }
-</script>
+        <button type="submit" class="btn calculate-btn">Calculate</button>
+      </form>
 
-  </div>
+      <p id="result" class="result">Cost: GHS 0.00</p>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <p>&copy; 2025 Travel Cost Calculator</p>
+  </footer>
+
+  <script src="script.js"></script>
+  <script>
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.register('service-worker.js');
+    }
+  </script>
 </body>
 
 </html>
