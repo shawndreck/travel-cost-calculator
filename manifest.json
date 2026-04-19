@@ -1,6 +1,6 @@
 {
-  "name": "Fuel Cost Calculator",
-  "short_name": "FuelCalc",
+  "name": "Travel Cost Calculator",
+  "short_name": "TravelCalc",
   "start_url": "./index.html",
   "display": "standalone",
   "background_color": "#ffffff",
