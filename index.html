@@ -22,27 +22,104 @@
 
   <main class="main-content">
     <section class="calculator-section">
-      <form name="calculator" id="calculator" class="form">
-        <div class="form-group">
-          <label for="distance">Distance (km)</label>
-          <input type="number" id="distance" placeholder="e.g. 250" class="input"
-            min="0.1" step="any" inputmode="decimal" autofocus />
+      <form name="calculator" id="calculator" class="form" autocomplete="off">
+
+        <!-- Distance Mode Tabs -->
+        <div class="mode-tabs">
+          <button type="button" class="mode-tab active" data-mode="route">📍 Route</button>
+          <button type="button" class="mode-tab" data-mode="manual">✏️ Manual</button>
         </div>
 
-        <div class="form-group">
-          <label for="fuel-price">
-            Fuel Price (₵/Litre)
-            <span id="price-loading" class="loading-dot hidden" title="Fetching live price…"></span>
-          </label>
-          <input type="number" id="fuel-price" value="15.00" class="input" step="0.01" min="0.01" inputmode="decimal" />
+        <!-- Route Mode -->
+        <div id="route-mode" class="distance-mode">
+          <div class="form-group">
+            <label for="from-location">From</label>
+            <div class="location-input-wrap">
+              <input type="text" id="from-location" placeholder="Enter starting point" class="input location-input" />
+              <button type="button" id="use-my-location" class="gps-btn" title="Use my current location" aria-label="Use my current location">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="4"/><path d="M12 2v4M12 18v4M2 12h4M18 12h4"/></svg>
+              </button>
+            </div>
+            <div id="from-suggestions" class="suggestions hidden" role="listbox"></div>
+          </div>
+          <div class="form-group">
+            <label for="to-location">To</label>
+            <input type="text" id="to-location" placeholder="Enter destination" class="input location-input" />
+            <div id="to-suggestions" class="suggestions hidden" role="listbox"></div>
+          </div>
+          <div id="route-info" class="route-info hidden">
+            <span id="route-distance-text"></span>
+            <span id="route-loading" class="loading-dot hidden"></span>
+          </div>
         </div>
 
-        <div class="form-group">
-          <label for="fuel-consumption">Fuel Efficiency (km/l)</label>
-          <input type="number" id="fuel-consumption" value="6.7" class="input" step="0.1" min="0.1" inputmode="decimal" />
+        <!-- Manual Mode -->
+        <div id="manual-mode" class="distance-mode hidden">
+          <div class="form-group">
+            <label for="distance">Distance (km)</label>
+            <input type="number" id="distance" placeholder="e.g. 250" class="input"
+              min="0.1" step="any" inputmode="decimal" />
+          </div>
         </div>
 
-        <button type="submit" class="btn calculate-btn">Calculate</button>
+        <!-- Trip Type -->
+        <div class="form-group">
+          <label>Trip Type</label>
+          <div class="toggle-group">
+            <button type="button" class="toggle-btn active" data-trip="oneway">One-way</button>
+            <button type="button" class="toggle-btn" data-trip="roundtrip">Round-trip</button>
+          </div>
+        </div>
+
+        <!-- Driving Conditions -->
+        <div class="form-group">
+          <label>Driving Conditions</label>
+          <div class="condition-cards">
+            <button type="button" class="condition-card" data-condition="city">
+              <span class="condition-icon">🏙️</span>
+              <span class="condition-label">City</span>
+            </button>
+            <button type="button" class="condition-card active" data-condition="mixed">
+              <span class="condition-icon">🛣️</span>
+              <span class="condition-label">Mixed</span>
+            </button>
+            <button type="button" class="condition-card" data-condition="highway">
+              <span class="condition-icon">🛤️</span>
+              <span class="condition-label">Highway</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Buffer Slider -->
+        <div class="form-group">
+          <label for="buffer">Extra Cost Buffer: <strong id="buffer-value">10</strong>%</label>
+          <input type="range" id="buffer" class="range-slider" min="0" max="30" value="10" />
+          <div class="range-hints">
+            <span>No buffer</span>
+            <span>Heavy traffic / AC</span>
+          </div>
+        </div>
+
+        <!-- Fuel Details (collapsible) -->
+        <details class="fuel-details" open>
+          <summary>Fuel Settings</summary>
+          <div class="details-content">
+            <div class="form-group">
+              <label for="fuel-price">
+                Fuel Price (₵/Litre)
+                <span id="price-loading" class="loading-dot hidden" title="Fetching live price…"></span>
+              </label>
+              <input type="number" id="fuel-price" value="15.00" class="input" step="0.01" min="0.01" inputmode="decimal" />
+            </div>
+            <div class="form-group">
+              <label for="fuel-efficiency">Your Fuel Efficiency (km/l)</label>
+              <input type="number" id="fuel-efficiency" value="6.7" class="input" step="0.1" min="0.1" inputmode="decimal" />
+              <span class="field-hint">Use your real-world driving average, not brochure figure</span>
+            </div>
+          </div>
+        </details>
+
+        <button type="submit" class="btn calculate-btn">Calculate Trip Cost</button>
       </form>
 
       <div id="result" class="result"></div>
@@ -51,6 +128,7 @@
 
   <footer class="footer">
     <p>&copy; 2026 Travel Cost Calculator</p>
+    <p class="attribution">Route data &copy; <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener">OpenStreetMap</a> contributors</p>
   </footer>
 
   <script src="script.js"></script>
